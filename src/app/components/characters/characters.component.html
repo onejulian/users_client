@@ -1,0 +1,92 @@
+<app-paginator [total_pages]="42" [current_page]="current_page" (changePage)="loadData($event)"></app-paginator>
+<div class="flex justify-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="" *ngFor="let character of characters">
+            <div class="">
+                <img class="cursor-pointer" src="{{character.image}}" alt="Card image cap"
+                    (click)="getCharacter(character.id)">
+                <div class="">
+                    <div class="flex justify-between items-center mt-2">
+                        <h5 class="hover:text-blue-500 cursor-pointer" (click)="getCharacter(character.id)">
+                            {{character.name}}</h5>
+
+                        <div *ngIf="!isFavorite(character.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"
+                                class="cursor-pointer" (click)="addFavorite(character.id)">
+                                <path
+                                    d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0l-66.3 132.4L47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l96.4 94-22.6 132.1c-4.9 28.6 25.6 50 50.5 36.7L288 439.6l118.5 62.3c25.1 13.2 55.6-8.1 50.5-36.7l-22.6-132.1 96.4-94c19-18.5 8.5-50.8-17.7-54.6z"
+                                    fill="none" stroke="black" stroke-width="10" />
+                            </svg>
+                        </div>
+                        <div *ngIf="isFavorite(character.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"
+                                class="cursor-pointer" (click)="deleteFavorite(character.id)">
+                                <path
+                                    d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0l-66.3 132.4L47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l96.4 94-22.6 132.1c-4.9 28.6 25.6 50 50.5 36.7L288 439.6l118.5 62.3c25.1 13.2 55.6-8.1 50.5-36.7l-22.6-132.1 96.4-94c19-18.5 8.5-50.8-17.7-54.6z"
+                                    fill="yellow" stroke="black" stroke-width="10" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-paginator [total_pages]="42" [current_page]="current_page" (changePage)="loadData($event)"></app-paginator>
+
+
+<div *ngIf="showModal"
+    class="overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 outline-none focus:outline-none justify-center flex flex-col items-center">
+    <div class="relative min-w-[40%] my-6 mx-auto max-w-3xl">
+        <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none max-h-[610px]">
+            <div
+                class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t text-center">
+                <h3 class="text-2xl font-semibold ">
+                    {{ character.name }}
+                </h3>
+                <button
+                    class="p-1 ml-auto bg-transparent border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    (click)="toggleModal()">
+                    <span class="bg-transparent text-black  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        ×
+                    </span>
+                </button>
+            </div>
+            <div class="flex flex-wrap items-stretch font-thin overflow-y-auto justify-center">
+                <div class="m-4">
+                    <!-- <div class="flex"> -->
+                    <img src="{{character.image}}" alt="">
+                    <div class="flex justify-center">
+                        <div *ngIf="!isFavorite(character.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"
+                                class="cursor-pointer" (click)="addFavorite(character.id)">
+                                <path
+                                    d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0l-66.3 132.4L47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l96.4 94-22.6 132.1c-4.9 28.6 25.6 50 50.5 36.7L288 439.6l118.5 62.3c25.1 13.2 55.6-8.1 50.5-36.7l-22.6-132.1 96.4-94c19-18.5 8.5-50.8-17.7-54.6z"
+                                    fill="none" stroke="black" stroke-width="10" />
+                            </svg>
+                        </div>
+                        <div *ngIf="isFavorite(character.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"
+                                class="cursor-pointer" (click)="deleteFavorite(character.id)">
+                                <path
+                                    d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0l-66.3 132.4L47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l96.4 94-22.6 132.1c-4.9 28.6 25.6 50 50.5 36.7L288 439.6l118.5 62.3c25.1 13.2 55.6-8.1 50.5-36.7l-22.6-132.1 96.4-94c19-18.5 8.5-50.8-17.7-54.6z"
+                                    fill="yellow" stroke="black" stroke-width="10" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                    <p><span class="font-bold mt-1">Status:</span> {{character.status}}</p>
+                    <p><span class="font-bold mt-1">Species:</span> {{character.species}}</p>
+                    <p *ngIf="character.type != ''"><span class="font-bold mt-1">Type:</span> {{character.type}}</p>
+                    <p><span class="font-bold mt-1">Gender:</span> {{character.gender}}</p>
+                    <p><span class="font-bold mt-1">Origin:</span> {{character.origin.name}}</p>
+                    <p><span class="font-bold mt-1">Location:</span> {{character.location.name}}</p>
+                    <p><span class="font-bold mt-1">Episodes:</span> {{character.episode.length}}</p>
+                    <p><span class="font-bold mt-1">Created:</span> {{character.created | date:'dd/MM/yyyy'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

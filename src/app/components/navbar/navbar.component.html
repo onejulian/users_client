@@ -1,0 +1,29 @@
+<nav class="navbar bg-teal-500">
+        <div class="text-sm">
+            <button *ngIf="loggedIn" (click)="info_user()"
+                class="inline-block ml-4 text-sm px-4 py-1 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white my-2">
+                <span class="material-symbols-outlined">
+                    account_circle
+                </span>
+            </button>
+        </div>
+        <div>
+            <button *ngIf="isInRegisterPage" (click)="login()"
+                class="inline-block mr-4 text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white my-2">
+                Login
+            </button>
+            <button *ngIf="isInLoginPage" (click)="register()"
+                class="inline-block mr-4 text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white my-2">
+                Register
+            </button>
+            <button *ngIf="isInUserInfoPage" (click)="characters()"
+                class="inline-block mr-4 text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white my-2">
+                Characters
+            </button>
+            <button *ngIf="loggedIn" (click)="logout()"
+                class="inline-block mr-4 text-sm ml-4 px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white my-2">
+                Logout
+            </button>
+        </div>
+    <!-- </div> -->
+</nav>

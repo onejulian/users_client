@@ -1,0 +1,138 @@
+<!-- <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" required>
+    </div>
+    <div *ngIf="registerForm.get('name')?.errors && registerForm.get('name')?.touched">
+        <p *ngIf="registerForm.get('name')?.hasError('required')">First Name es requerido.</p>
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" required>
+    </div>
+    <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+        <p *ngIf="registerForm.get('email')?.hasError('required')">Email es requerido.</p>
+        <p *ngIf="registerForm.get('email')?.hasError('email')">Email no es valido.</p>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" required>
+    </div>
+    <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+        <p *ngIf="registerForm.get('password')?.hasError('required')">Password es requerido.</p>
+    </div>
+
+    <div>
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" id="password_confirmation" formControlName="password_confirmation" required>
+    </div>
+    <div
+        *ngIf="registerForm.get('password_confirmation')?.errors && registerForm.get('password_confirmation')?.touched">
+        <p *ngIf="registerForm.get('password_confirmation')?.hasError('required')">Confirm Password es requerido.</p>
+    </div>
+    <div
+        *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('password_confirmation')?.dirty || registerForm.get('password_confirmation')?.touched)">
+        Las contraseñas no coinciden.
+    </div>
+
+    <div>
+        <label for="address">Address</label>
+        <input type="text" id="address" formControlName="address" required>
+    </div>
+    <div *ngIf="registerForm.get('address')?.errors && registerForm.get('address')?.touched">
+        <p *ngIf="registerForm.get('address')?.hasError('required')">Address es requerido.</p>
+    </div>
+
+    <div>
+        <label for="city">City</label>
+        <input type="text" id="city" formControlName="city" required>
+    </div>
+    <div *ngIf="registerForm.get('city')?.errors && registerForm.get('city')?.touched">
+        <p *ngIf="registerForm.get('city')?.hasError('required')">City es requerido.</p>
+    </div>
+
+    <div>
+        <label for="birthdate">Birthday</label>
+        <input type="date" id="birthdate" formControlName="birthdate" required>
+    </div>
+    <div *ngIf="registerForm.get('birthdate')?.errors && registerForm.get('birthdate')?.touched">
+        <p *ngIf="registerForm.get('birthdate')?.hasError('required')">Birthday es requerido.</p>
+    </div>
+
+    <button type="submit">Register</button>
+</form> -->
+
+<div class="flex justify-center ">
+    <form [formGroup]="registerForm" (ngSubmit)="register()"
+        class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[40%] m-4">
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+            <input type="text" id="name" formControlName="name" required
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('name')?.errors && registerForm.get('name')?.touched"
+            class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('name')?.hasError('required')">First Name es requerido.</p>
+        </div>
+
+        <!-- Similar structure is repeated for other form fields... -->
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+            <input type="email" id="email" formControlName="email" required
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched"
+            class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('email')?.hasError('required')">Email es requerido.</p>
+            <p *ngIf="registerForm.get('email')?.hasError('email')">Email no es valido.</p>
+        </div>
+
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+            <input type="password" id="password" formControlName="password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched" class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('password')?.hasError('required')">Password es requerido.</p>
+        </div>
+        
+        <div class="mb-4">
+            <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+            <input type="password" id="password_confirmation" formControlName="password_confirmation" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('password_confirmation')?.errors && registerForm.get('password_confirmation')?.touched" class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('password_confirmation')?.hasError('required')">Confirm Password es requerido.</p>
+        </div>
+        <div *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('password_confirmation')?.dirty || registerForm.get('password_confirmation')?.touched)" class="text-red-500 text-xs italic">
+            Las contraseñas no coinciden.
+        </div>
+        
+        <div class="mb-4">
+            <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address</label>
+            <input type="text" id="address" formControlName="address" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('address')?.errors && registerForm.get('address')?.touched" class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('address')?.hasError('required')">Address es requerido.</p>
+        </div>
+        
+        <div class="mb-4">
+            <label for="city" class="block text-gray-700 text-sm font-bold mb-2">City</label>
+            <input type="text" id="city" formControlName="city" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('city')?.errors && registerForm.get('city')?.touched" class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('city')?.hasError('required')">City es requerido.</p>
+        </div>
+        
+        <div class="mb-4">
+            <label for="birthdate" class="block text-gray-700 text-sm font-bold mb-2">Birthday</label>
+            <input type="date" id="birthdate" formControlName="birthdate" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div *ngIf="registerForm.get('birthdate')?.errors && registerForm.get('birthdate')?.touched" class="text-red-500 text-xs italic">
+            <p *ngIf="registerForm.get('birthdate')?.hasError('required')">Birthday es requerido.</p>
+        </div>
+
+        <button type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
+    </form>
+</div>

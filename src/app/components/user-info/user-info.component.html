@@ -1,0 +1,27 @@
+<div *ngIf="user" class="my-4 w-[50%] mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Información del Usuario</h1>
+    <p class="mb-2"><strong class="font-bold">Nombre: </strong> <span class="text-gray-700">{{ user.name }}</span></p>
+    <p class="mb-2"><strong class="font-bold">Email: </strong> <span class="text-gray-700">{{ user.email }}</span></p>
+    <p class="mb-2"><strong class="font-bold">Dirección: </strong> <span class="text-gray-700">{{ user.address }}</span></p>
+    <p class="mb-2"><strong class="font-bold">Fecha de nacimiento: </strong> <span class="text-gray-700">{{ user.birthdate | date: 'dd/MM/yyyy' }}</span></p>
+    <p class="mb-2"><strong class="font-bold">Ciudad: </strong> <span class="text-gray-700">{{ user.city }}</span></p>
+    <p class="mb-2"><strong class="font-bold">Más información: </strong> <span class="text-gray-700">{{ user.more_info }}</span></p>
+</div>
+
+
+<form [formGroup]="loginForm" *ngIf="user" class="my-4 w-[50%] mx-auto" (ngSubmit)="updateUserInfo()">
+    <h1 class="text-2xl font-bold mb-4">Editar Información del Usuario</h1>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="more_info">
+            Más información
+        </label>
+        <textarea formControlName="more_info" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="more_info" type="text" placeholder="Más información" name="more_info"></textarea>
+    </div>
+    <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">
+            Guardar
+        </button>
+    </div>
+</form>
