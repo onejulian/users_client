@@ -13,7 +13,7 @@ import {
   providedIn: 'root'
 })
 export class FavoriteService {
-  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = 'https://users-api.eastus.cloudapp.azure.com/api/';
 
   constructor(
     private http: HttpClient,
