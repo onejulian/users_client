@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class AuthService {
 
-  private baseUrl = 'https://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
   private _user: LoginResponse = {} as LoginResponse;
 
   private loginUrl = this.baseUrl + 'login';

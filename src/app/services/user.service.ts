@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  private baseUrl = 'https://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
 
   private updateMoreInfo = this.baseUrl + 'user/update-more-info';
 

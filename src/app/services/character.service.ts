@@ -7,7 +7,7 @@ import { CharacterDetail } from '../models';
   providedIn: 'root'
 })
 export class CharacterService {
-  private baseUrl = 'https://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
 
   constructor(
     private http: HttpClient,
