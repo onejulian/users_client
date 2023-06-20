@@ -6,7 +6,8 @@ import {
   Register,
   LoginResponse,
   RegisterResponse,
-  LogoutResponse
+  LogoutResponse,
+  api
 } from '../models';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -16,8 +17,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = api;
   private _user: LoginResponse = {} as LoginResponse;
 
   private loginUrl = this.baseUrl + 'login';
@@ -45,16 +45,8 @@ export class AuthService {
     this.showLoading();
     return this.http.post<LoginResponse>(this.loginUrl, user).pipe(
       map((response: LoginResponse) => {
-        this.user = response;
-        let currentDate = new Date();
-        let expirationDate = new Date(currentDate.getTime() + (24 * 60 * 60 * 1000)); // 24 hours
-        // let expirationDate = new Date(currentDate.getTime() + (0.5 * 60 * 1000)); // 30 seconds
-        let tokenData = {
-          token: response.token,
-          expirationDate: expirationDate.getTime()
-        };
-        localStorage.setItem('token', JSON.stringify(tokenData));
-        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', response.Token);
+        localStorage.setItem('email', response.Email);
         return response;
       })
     );
@@ -65,7 +57,7 @@ export class AuthService {
     return this.http.post<RegisterResponse>(this.registerUrl, user).pipe(
       map((response: RegisterResponse) => {
         let loginData = {
-          email: response.data.email,
+          email: response.email,
           password: user.password
         };
         setTimeout(() => {
@@ -86,7 +78,7 @@ export class AuthService {
       map((response: LogoutResponse) => {
         this.user = {} as LoginResponse;
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('email');
         this.router.navigate(['/login']);
         Swal.close();
         return response;

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
-  UpdateMoreInfoRequest
+  UpdateMoreInfoRequest,
+  api
 } from '../models';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = api;
 
   private updateMoreInfo = this.baseUrl + 'user/update-more-info';
 

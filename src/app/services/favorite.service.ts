@@ -2,32 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { 
-  Favorite, 
-  AddFavoriteResponse,
+  Favorite,
   DeleteFavoriteResponse,
-  AddFavoriteRequest,
-  DeleteFavoriteRequest
+  api
 } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  private baseUrl = 'http://users-api.eastus.cloudapp.azure.com/api/';
+  private baseUrl = api;
 
   constructor(
     private http: HttpClient,
   ) { }
 
   getFavorites(): Observable<Favorite[]> {
-    return this.http.get<Favorite[]>(this.baseUrl + 'favorites');
+    return this.http.get<Favorite[]>(this.baseUrl + 'characters');
   }
 
-  addFavorite(request: AddFavoriteRequest): Observable<AddFavoriteResponse> {
-    return this.http.post<AddFavoriteResponse>(this.baseUrl + 'favorites', request);
+  addFavorite(id: string): Observable<Favorite> {
+    return this.http.post<Favorite>(this.baseUrl + 'characters?id=' + id, {});
   }
 
-  deleteFavorite(request: DeleteFavoriteRequest): Observable<DeleteFavoriteResponse> {
-    return this.http.delete<DeleteFavoriteResponse>(this.baseUrl + 'favorites', { params: request as any });
+  deleteFavorite(id: string): Observable<DeleteFavoriteResponse> {
+    return this.http.delete<DeleteFavoriteResponse>(this.baseUrl + 'characters?id=' + id);
   }
 }

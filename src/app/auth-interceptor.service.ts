@@ -23,34 +23,18 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request?.url.endsWith('logout')) {
       let tokenData = localStorage.getItem('token')
-      let token = tokenData ? JSON.parse(tokenData).token : '';
-      if (token) {
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-      } else {
-        this.router.navigate(['/login']);
-        return throwError(() => new HttpErrorResponse({ status: 401 }));
-      }
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${tokenData}`
+        }
+      });
     } else if (!request?.url.endsWith('login') && !request?.url.endsWith('register')) {
       let tokenData = localStorage.getItem('token')
-      let expirationDate = tokenData ? JSON.parse(tokenData).expirationDate : 0;
-      let currentDate = new Date();
-      if (currentDate.getTime() > expirationDate) {
-        Swal.close();
-        this.authService.logout().subscribe();
-        return throwError(() => new HttpErrorResponse({ status: 401 }));
-      }
-      let token = tokenData ? JSON.parse(tokenData).token : '';
-      if (token) {
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-      }
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${tokenData}`
+        }
+      });
     }
     return (next as any)
       .handle(request)

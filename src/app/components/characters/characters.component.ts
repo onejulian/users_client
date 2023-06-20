@@ -6,9 +6,9 @@ import {
 } from 'src/app/services';
 import {
   Favorite,
-  CharacterDetail,
-  AddFavoriteRequest,
-  DeleteFavoriteRequest,
+  Character,
+  // AddFavoriteRequest,
+  // DeleteFavoriteRequest,
 } from 'src/app/models';
 import Swal from 'sweetalert2';
 
@@ -21,8 +21,8 @@ export class CharactersComponent implements OnInit {
 
   favorites: Favorite[] = [];
   currentFavorites: string[] = [];
-  characters: CharacterDetail[] = [];
-  character: CharacterDetail = {} as CharacterDetail;
+  characters: Character[] = [];
+  character: Character = {} as Character;
   pages = 42;
   current_page = 1;
   showModal = false;
@@ -40,7 +40,7 @@ export class CharactersComponent implements OnInit {
   ngOnInit(): void {
     this.showLoading();
     this.characterService.getCharacters(this.current_page).subscribe(characters => {
-      this.characters = characters;
+      this.characters = characters.results;
       Swal.close();
     });
     this.getFavorites();
@@ -50,7 +50,7 @@ export class CharactersComponent implements OnInit {
     this.showLoading();
     this.current_page = page;
     this.characterService.getCharacters(this.current_page).subscribe(characters => {
-      this.characters = characters;
+      this.characters = characters.results;
     });
     this.getFavorites();
   }
@@ -67,7 +67,7 @@ export class CharactersComponent implements OnInit {
   getFavorites(): void {
     this.favoriteService.getFavorites().subscribe(favorites => {
       this.favorites = favorites;
-      this.currentFavorites = this.favorites.map(favorite => favorite.character_name_favorite);
+      this.currentFavorites = this.favorites.map(favorite => favorite.id_character);
       Swal.close();
     });
   }
@@ -78,20 +78,14 @@ export class CharactersComponent implements OnInit {
 
   addFavorite(id: number): void {
     this.currentFavorites.push(`${id}`);
-    const request: AddFavoriteRequest = {
-      character_name_favorite: `${id}`
-    };
-    this.favoriteService.addFavorite(request).subscribe(() => {
+    this.favoriteService.addFavorite(`${id}`).subscribe(() => {
       this.getFavorites();
     });
   }
 
   deleteFavorite(id: number): void {
     this.currentFavorites = this.currentFavorites.filter(favorite => favorite !== `${id}`);
-    const request: DeleteFavoriteRequest = {
-      character_name_favorite: `${id}`
-    };
-    this.favoriteService.deleteFavorite(request).subscribe(() => {
+    this.favoriteService.deleteFavorite(`${id}`).subscribe(() => {
       this.getFavorites();
     });
   }

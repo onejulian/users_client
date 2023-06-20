@@ -19,16 +19,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      birthdate: ['', Validators.required],
+      // address: ['', Validators.required],
+      // city: ['', Validators.required],
+      // birthdate: ['', Validators.required],
     },
     {
-      validator: this.passwordMatchValidator
+      validators: [this.passwordMatchValidator, this.minLenghtPassword]
     }
     );
   }
@@ -36,16 +37,28 @@ export class RegisterComponent implements OnInit {
   register(): void {
     if (this.registerForm.valid) {
       let user: Register = {
-        name: this.registerForm.value.name,
+        // name: this.registerForm.value.name,
         email: this.registerForm.value.email,
+        firstName: this.registerForm.value.firstname,
+        lastName: this.registerForm.value.lastname,
         password: this.registerForm.value.password,
-        password_confirmation: this.registerForm.value.password_confirmation,
-        address: this.registerForm.value.address,
-        city: this.registerForm.value.city,
-        birthdate: this.registerForm.value.birthdate,
+        // password_confirmation: this.registerForm.value.password_confirmation,
+        // address: this.registerForm.value.address,
+        // city: this.registerForm.value.city,
+        // birthdate: this.registerForm.value.birthdate,
       };
       this.authService.register(user).subscribe(
-        () => {
+        (response: Register) => {
+          console.log(response);
+          // this.registerForm = this.fb.group({
+          //   name: ['', Validators.required],
+          //   email: ['', [Validators.required, Validators.email]],
+          //   password: ['', [Validators.required, Validators.minLength(8)]],
+          //   password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
+          //   address: ['', Validators.required],
+          //   city: ['', Validators.required],
+          //   birthdate: ['', Validators.required],
+          // });
         }
       );
     }
@@ -57,6 +70,16 @@ export class RegisterComponent implements OnInit {
   
     if (password?.value !== confirmPassword?.value) {
       return { 'passwordMismatch': true };
+    }
+  
+    return null;
+  }
+
+  minLenghtPassword(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password');
+  
+    if (password?.value.length < 8) {
+      return { 'minLenghtPassword': true };
     }
   
     return null;
