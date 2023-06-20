@@ -26,10 +26,7 @@ export class LoginComponent implements OnInit {
     });
     let tokenData = localStorage.getItem('token');
     if (tokenData) {
-      let token = JSON.parse(tokenData);
-      if (token.expirationDate > new Date().getTime()) {
-        this.router.navigate(['/characters']);
-      }
+      this.router.navigate(['/characters']);
     }
   }
 
