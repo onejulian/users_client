@@ -44,7 +44,14 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError(err: any, req: any): any {
-    if (err.status === 401) {
+    if (err.status === 401 || err.status === 403 || err.status === 400) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+      })
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
       this.router.navigate(['/login']);
       return throwError(() => err);
     }
