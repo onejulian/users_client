@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(user).subscribe(
         (response: LoginResponse) => {
           if (response.Token) {
-            localStorage.setItem('token', response.Token);
+            sessionStorage.setItem('token', response.Token);
             this.router.navigate(['/characters']);
           }
         }
