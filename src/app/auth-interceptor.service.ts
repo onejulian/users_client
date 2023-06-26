@@ -21,15 +21,8 @@ export class AuthInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request?.url.endsWith('logout')) {
-      let tokenData = localStorage.getItem('token')
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${tokenData}`
-        }
-      });
-    } else if (!request?.url.endsWith('login') && !request?.url.endsWith('register')) {
-      let tokenData = localStorage.getItem('token')
+    if (!request?.url.endsWith('login') && !request?.url.endsWith('register')) {
+      let tokenData = sessionStorage.getItem('token');
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${tokenData}`
