@@ -45,8 +45,6 @@ export class AuthService {
     this.showLoading();
     return this.http.post<LoginResponse>(this.loginUrl, user).pipe(
       map((response: LoginResponse) => {
-        localStorage.setItem('token', response.Token);
-        localStorage.setItem('email', response.Email);
         return response;
       })
     );

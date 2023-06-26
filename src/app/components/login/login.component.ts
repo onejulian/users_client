@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
       };
       this.authService.login(user).subscribe(
         (response: LoginResponse) => {
-          console.log(response.Token);
           if (response.Token) {
+            localStorage.setItem('token', response.Token);
             this.router.navigate(['/characters']);
           }
         }
