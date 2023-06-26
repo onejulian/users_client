@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
       };
       this.authService.register(user).subscribe(
         (response: Register) => {
-          console.log(response);
+          // console.log(response);
           // this.registerForm = this.fb.group({
           //   name: ['', Validators.required],
           //   email: ['', [Validators.required, Validators.email]],
