@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError(err: any, req: any): any {
-    if (err.status === 401 || err.status === 403 || err.status === 400) {
+    if (err.status !== 200 && err.status !== 201) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
