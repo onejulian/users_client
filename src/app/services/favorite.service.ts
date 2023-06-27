@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { 
   Favorite,
   DeleteFavoriteResponse,
-  api
 } from '../models';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  private baseUrl = api;
+  private baseUrl = env.api;
 
   constructor(
     private http: HttpClient,

@@ -1,1 +1,0 @@
-export const api = "https://characters-api.juliandavid.me/"

@@ -43,8 +43,23 @@
                   "maximumError": "4kb"
                 }
               ],
+              "fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							],
               "outputHashing": "all"
             },
+            "staging": {
+							"sourceMap": true,
+							"fileReplacements": [
+							  {
+								"replace": "src/environments/environment.ts",
+								"with": "src/environments/environment.staging.ts"
+							  }
+							]
+						},
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -54,7 +69,7 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "staging"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

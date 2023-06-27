@@ -7,17 +7,17 @@ import {
   LoginResponse,
   RegisterResponse,
   LogoutResponse,
-  api
 } from '../models';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = api;
+  private baseUrl = env.api;
   private _user: LoginResponse = {} as LoginResponse;
 
   private loginUrl = this.baseUrl + 'login';

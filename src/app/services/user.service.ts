@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
   UpdateMoreInfoRequest,
-  api
 } from '../models';
 import { map } from 'rxjs/operators';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = api;
+  private baseUrl = env.api;
 
   private updateMoreInfo = this.baseUrl + 'user/update-more-info';
 
