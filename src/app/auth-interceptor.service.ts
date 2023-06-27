@@ -43,8 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
         title: 'Oops...',
         text: err.error.message,
       })
-      localStorage.removeItem('token');
-      localStorage.removeItem('email');
+      sessionStorage.clear();
       this.router.navigate(['/login']);
       return throwError(() => err);
     }
