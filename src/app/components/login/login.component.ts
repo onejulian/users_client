@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    let tokenData = localStorage.getItem('token');
+    let tokenData = sessionStorage.getItem('token');
     if (tokenData) {
       this.router.navigate(['/characters']);
     }
