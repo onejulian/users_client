@@ -20,6 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
     private authService: AuthService
   ) { }
 
+  errorsAllowed = ["el personaje ya existe", "personaje no encontrado"];
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!request?.url.endsWith('login') && !request?.url.endsWith('register')) {
       let tokenData = sessionStorage.getItem('token');
@@ -44,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
         title: 'Oops...',
         text: textErr
       })
-      if (textErr !== 'el personaje ya existe') {
+      if (!this.errorsAllowed.includes(textErr)) {
         sessionStorage.clear();
         this.router.navigate(['/login']);
       }
