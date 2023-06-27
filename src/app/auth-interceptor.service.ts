@@ -38,13 +38,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handleError(err: any, req: any): any {
     if (err.status !== 200 && err.status !== 201) {
+      const textErr = err.error.error;
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: err.error.error,
+        text: textErr
       })
       sessionStorage.clear();
-      this.router.navigate(['/login']);
+      if (textErr !== 'el personaje ya existe') {
+        this.router.navigate(['/login']);
+      }
       return throwError(() => err);
     }
     return throwError(() => err);
