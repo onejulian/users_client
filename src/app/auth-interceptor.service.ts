@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: err.error.message,
+        text: err.error,
       })
       sessionStorage.clear();
       this.router.navigate(['/login']);
