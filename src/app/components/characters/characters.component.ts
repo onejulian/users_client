@@ -7,8 +7,6 @@ import {
 import {
   Favorite,
   Character,
-  // AddFavoriteRequest,
-  // DeleteFavoriteRequest,
 } from 'src/app/models';
 import Swal from 'sweetalert2';
 

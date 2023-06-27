@@ -44,8 +44,8 @@ export class AuthInterceptor implements HttpInterceptor {
         title: 'Oops...',
         text: textErr
       })
-      sessionStorage.clear();
       if (textErr !== 'el personaje ya existe') {
+        sessionStorage.clear();
         this.router.navigate(['/login']);
       }
       return throwError(() => err);
