@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    let tokenData = sessionStorage.getItem('token');
+    let tokenData = localStorage.getItem('token');
     if (tokenData) {
       this.router.navigate(['/characters']);
     }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(user).subscribe(
         (response: LoginResponse) => {
           if (response.Token) {
-            sessionStorage.setItem('token', response.Token);
+            localStorage.setItem('token', response.Token);
             this.router.navigate(['/characters']);
           }
         }

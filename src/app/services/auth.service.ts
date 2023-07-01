@@ -61,7 +61,7 @@ export class AuthService {
         setTimeout(() => {
           this.login(loginData).subscribe(
             (response: LoginResponse) => {
-              sessionStorage.setItem('token', response.Token);
+              localStorage.setItem('token', response.Token);
               this.router.navigate(['/characters']);
             }
           );
@@ -76,7 +76,7 @@ export class AuthService {
     return this.http.get<LogoutResponse>(this.logoutUrl).pipe(
       map((response: LogoutResponse) => {
         this.user = {} as LoginResponse;
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         this.router.navigate(['/login']);
         Swal.close();
         return response;

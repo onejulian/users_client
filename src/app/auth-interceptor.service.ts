@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!request?.url.endsWith('login') && !request?.url.endsWith('register')) {
-      let tokenData = sessionStorage.getItem('token');
+      let tokenData = localStorage.getItem('token');
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${tokenData}`
@@ -47,7 +47,7 @@ export class AuthInterceptor implements HttpInterceptor {
         text: textErr
       })
       if (!this.errorsAllowed.includes(textErr)) {
-        sessionStorage.clear();
+        localStorage.clear();
         this.router.navigate(['/login']);
       }
       return throwError(() => err);
